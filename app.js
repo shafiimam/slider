@@ -167,3 +167,10 @@ const showError = error => {
     document.getElementById('error-message').innerText = error;
     errorMessageDiv.style.display = 'block';
 }
+
+// search button will trigger if pressed enter key
+document.getElementById('search').addEventListener("keypress", function(event) {
+    if (event.key == 'Enter') {
+        document.getElementById('search-btn').click();
+    }
+})
