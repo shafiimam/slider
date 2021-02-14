@@ -37,11 +37,19 @@ const getImages = async(query) => {
         toggleSpinner();
         const result = await fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`);
         const data = await result.json();
-        showImages(data.hits);
-
-    } catch (err) {
+        if (data.total == 0) {
+            imagesArea.style.display = 'none';
+            const errorMessageDiv = document.getElementById('not-found');
+            document.getElementById('error-message').innerText = 'No image found!!Try again';
+            errorMessageDiv.style.display = 'block';
+            toggleSpinner();
+        } else {
+            imagesArea.style.display = 'block';
+            showImages(data.hits);
+        }
+    } catch (error) {
         toggleSpinner();
-        showError(err);
+        showError(error);
     }
 }
 
@@ -136,9 +144,11 @@ searchBtn.addEventListener('click', function() {
 })
 
 sliderBtn.addEventListener('click', function() {
-        createSlider()
-    })
-    // spinner added for bonus
+    createSlider()
+})
+
+// bonus contents
+// spinner 
 const toggleSpinner = () => {
     const spinner = document.getElementById('loading-spinner');
     imagesArea.classList.toggle('d-none');
@@ -146,18 +156,14 @@ const toggleSpinner = () => {
 }
 
 const closeCard = () => {
-        document.getElementById('not-found').style.display = 'none';
-        const container = document.getElementsByClassName('container');
-        container.style.display = 'block';
+    document.getElementById('not-found').style.display = 'none';
 
-    }
-    // function for search not found error
+}
+
+// function for search not found error
 const showError = error => {
-    const container = document.getElementsByClassName('container');
-    container.style.display = 'none';
+    imagesArea.style.display = 'none';
     const errorMessageDiv = document.getElementById('not-found');
     document.getElementById('error-message').innerText = error;
     errorMessageDiv.style.display = 'block';
-
-
 }
