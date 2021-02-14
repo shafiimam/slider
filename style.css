@@ -67,14 +67,7 @@ img {
 }
 
 img {
-    height: 180px !important;
-    width: 320px !important;
     margin-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-img:hover {
-    transform: scale(1.2);
 }
 
 .high-res-image {
