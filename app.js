@@ -68,9 +68,11 @@ const selectItem = (event, img) => {
     if (item === -1) {
         sliders.push(img);
         element.classList.toggle('added');
+
     } else {
-        sliders.pop(img);
+        sliders.splice(sliders.indexOf(img), 1);
         element.classList.toggle('added');
+
     }
 }
 var timer
